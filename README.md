@@ -37,36 +37,6 @@ No complicated seals or stiff poses required! Just count your fingers or make na
 
 ---
 
-## 🎮 Gameplay Modes
-
-1. **Free Training (自由鍛錬)**:
-   - Sandbox environment to freely practice all 10 jutsu against interactive wooden training dummies.
-   - Dummies feature spring wobble physics, splintering debris, floating damage numbers, and auto-respawn.
-2. **Jutsu Scrolls Manual (忍術巻物)**:
-   - Guided reference manual detailing each hand seal, chakra costs, cooldowns, and instant "Cast Jutsu" test triggers.
-3. **Target Academy Challenge (標的試練)**:
-   - 60-second timed trial where training targets spawn and record damage.
-   - Combo multiplier counter builds as you chain consecutive strikes.
-   - Final evaluation scroll awards an official Shinobi Rank:
-     - *Academy Student* (0 - 600 pts)
-     - *Genin* (600 - 1,800 pts)
-     - *Chunin* (1,800 - 3,800 pts)
-     - *Jonin* (3,800 - 6,500 pts)
-     - *ANBU Black Ops* (6,500 - 10,000 pts)
-     - *Shadow Master (Kage)* (10,000+ pts)
-
----
-
-## ⌨️ Controls & Keybindings
-
-- **`W` / `A` / `S` / `D` or Arrow Keys**: Move Ninja Trainee
-- **`Mouse Drag`**: Orbit camera around the arena
-- **`Mouse Wheel`**: Zoom camera distance
-- **`1` - `9` & `0`**: Direct Jutsu ability triggers
-- **`C`**: Rapid Chakra Meditation (recharges +20 chakra instantly)
-- **`Clicking Ability Cards`**: Cast any jutsu directly from the bottom dock
-
----
 
 ## 🚀 Quick Start Guide
 
