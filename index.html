@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadow Jutsu - Actual Footage & Live Tracking</title>
+  <meta name="description" content="Fullscreen Live Webcam Footage with Real-Time Skeleton Tracking & Video Shadow Clones">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="camera-first-mode">
+
+  <!-- =========================================================================
+       ACTUAL WEBCAM FOOTAGE & LIVE SKELETON TRACKING (BIG SCREEN FULLSCREEN)
+       ========================================================================= -->
+  <div id="camera-viewport-container">
+    <!-- Primary: Direct High-Speed MJPEG Stream with Real-Time Embedded Skeleton Tracking & Video Clones -->
+    <img id="camera-stream" src="/video_feed" alt="Live Webcam Footage & Real-Time Tracking" onerror="window.handleStreamError()">
+    
+    <!-- Fallback HTML5 video if running without Python server -->
+    <video id="main-webcam" autoplay playsinline muted style="display: none;"></video>
+    <canvas id="fx-canvas" style="display: none;"></canvas>
+    
+    <!-- Flashbang Screen -->
+    <div id="flash-screen"></div>
+  </div>
+
+  <!-- Cinematic Vignette -->
+  <div class="camera-vignette"></div>
+
+  <!-- Top Floating Header -->
+  <header class="camera-header-hud">
+    <div class="header-brand">
+      <span class="shinobi-symbol">🥷</span>
+      <div>
+        <h1 class="brand-title">SHADOW JUTSU LIVE TRACKING</h1>
+        <span class="status-pill" id="status-text">🟢 Neural AI Vision Active (30 FPS)</span>
+      </div>
+    </div>
+
+    <!-- Active Gesture Detected Badge -->
+    <div class="gesture-badge-container">
+      <div class="detected-badge" id="gesture-detected-badge">Pose: Ready (Show Hand)</div>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <button class="round-btn" id="audio-toggle-btn" title="Toggle Sound FX (Web Audio)" onclick="window.toggleAudio()">🔊</button>
+      <button class="round-btn" title="Hand Seals Guide" onclick="window.toggleGuide()">📜</button>
+    </div>
+  </header>
+
+  <!-- Quick Finger Count Cheat-Sheet Strip -->
+  <div class="easy-cheat-strip">
+    <span class="cheat-pill" onclick="window.triggerJutsu('shadow_clones')">✋ <strong>5 Fingers</strong> = Clones [1]</span>
+    <span class="cheat-pill" onclick="window.triggerJutsu('clear_clones')">👎 <strong>Thumb Down / 3 Fingers</strong> = Disperse Clones [C]</span>
+    <span class="cheat-pill" onclick="window.triggerJutsu('rasengan')">✊ <strong>Fist</strong> = Rasengan [4]</span>
+    <span class="cheat-pill" onclick="window.triggerJutsu('chidori')">✌️ <strong>2 Fingers</strong> = Chidori [2]</span>
+    <span class="cheat-pill" onclick="window.triggerJutsu('fireball')">☝️ <strong>1 Finger</strong> = Fireball [3]</span>
+    <span class="cheat-pill" onclick="window.triggerJutsu('substitution')">👍 <strong>Thumb</strong> = Log [5]</span>
+    <span class="cheat-pill" onclick="window.triggerJutsu('shadow_army')">🙌 <strong>2 Hands</strong> = Army [0]</span>
+  </div>
+
+  <!-- Big Floating Action Banner -->
+  <div id="action-banner">KAGE BUNSHIN NO JUTSU!</div>
+
+  <!-- =========================================================================
+       BOTTOM FLOATING JUTSU BAR (TAP OR USE SIMPLE HAND SIGNS / HOTKEYS)
+       ========================================================================= -->
+  <footer class="camera-footer-dock">
+    <div class="dock-container">
+      <button class="jutsu-tap-card" onclick="window.triggerJutsu('shadow_clones')" title="✋ Open Hand (5 Fingers)">
+        <span class="k-key">[1] ✋</span>
+        <span class="j-icon">👥</span>
+        <span class="j-name">Shadow Clones</span>
+      </button>
+
+      <button class="jutsu-tap-card clear-btn" onclick="window.triggerJutsu('clear_clones')" title="👎 Thumb Down or 3 Fingers to Disperse">
+        <span class="k-key">[C] 👎</span>
+        <span class="j-icon">💨</span>
+        <span class="j-name">Disperse Clones</span>
+      </button>
+
+      <button class="jutsu-tap-card" onclick="window.triggerJutsu('chidori')" title="✌️ 2 Fingers (Peace Sign)">
+        <span class="k-key">[2] ✌️</span>
+        <span class="j-icon">⚡</span>
+        <span class="j-name">Chidori</span>
+      </button>
+
+      <button class="jutsu-tap-card" onclick="window.triggerJutsu('fireball')" title="☝️ 1 Finger Pointing">
+        <span class="k-key">[3] ☝️</span>
+        <span class="j-icon">🔥</span>
+        <span class="j-name">Fireball</span>
+      </button>
+
+      <button class="jutsu-tap-card" onclick="window.triggerJutsu('rasengan')" title="✊ Closed Fist (0 Fingers)">
+        <span class="k-key">[4] ✊</span>
+        <span class="j-icon">🌀</span>
+        <span class="j-name">Rasengan</span>
+      </button>
+
+      <button class="jutsu-tap-card" onclick="window.triggerJutsu('substitution')" title="👍 Thumbs Up">
+        <span class="k-key">[5] 👍</span>
+        <span class="j-icon">🪵</span>
+        <span class="j-name">Substitution</span>
+      </button>
+
+      <button class="jutsu-tap-card ultimate" onclick="window.triggerJutsu('shadow_army')" title="🙌 Both Hands Up">
+        <span class="k-key">[0] 🙌</span>
+        <span class="j-icon">⛩️</span>
+        <span class="j-name">Shadow Army</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- Hand Signs & Gesture Guide Modal -->
+  <div class="guide-modal" id="guide-modal">
+    <div class="guide-dialog">
+      <button class="guide-close" onclick="window.toggleGuide()">✕</button>
+      <h2 style="font-family: var(--font-shinobi); color: #fff; margin-bottom: 8px;">📜 Super Easy Hand Signs</h2>
+      <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 16px;">Natural hand signs & finger counts:</p>
+      
+      <div class="guide-list">
+        <div class="guide-item">
+          <span class="g-seal">✋ 5 Fingers / Any Open Hand (Key [1])</span>
+          <span class="g-jutsu"><strong>Shadow Clone Jutsu</strong> — Spawns 3 video shadow clones of you in smoke!</span>
+        </div>
+        <div class="guide-item">
+          <span class="g-seal">👎 Thumb Down OR 👌 3 Fingers Up (Key [C])</span>
+          <span class="g-jutsu"><strong>Disperse / Delete Shadow Clones</strong> — Instantly removes all shadow clones in clouds of smoke!</span>
+        </div>
+        <div class="guide-item">
+          <span class="g-seal">✌️ 2 Fingers / Peace Sign (Key [2])</span>
+          <span class="g-jutsu"><strong>Chidori Lightning</strong> — Electric blue lightning crackles on your fingertips!</span>
+        </div>
+        <div class="guide-item">
+          <span class="g-seal">☝️ 1 Finger / Point Up (Key [3])</span>
+          <span class="g-jutsu"><strong>Fireball Jutsu</strong> — Great roaring flame fireball launches from your fingertip!</span>
+        </div>
+        <div class="guide-item">
+          <span class="g-seal">✊ 0 Fingers / Closed Fist (Key [4])</span>
+          <span class="g-jutsu"><strong>Rasengan</strong> — Swirling blue chakra orb charges directly in your fist!</span>
+        </div>
+        <div class="guide-item">
+          <span class="g-seal">👍 Thumbs Up (Key [5])</span>
+          <span class="g-jutsu"><strong>Substitution Jutsu</strong> — Instant smoke puff; a wooden training log takes your place!</span>
+        </div>
+        <div class="guide-item">
+          <span class="g-seal">🙌 Both Hands in Camera View (Key [0])</span>
+          <span class="g-jutsu"><strong>Ultimate Shadow Army</strong> — Spawns 10+ shadow clones covering the screen!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Procedural Web Audio Engine & Frontend Controller -->
+  <script src="js/audio.js"></script>
+  <script>
+    let audioMuted = false;
+
+    function ensureAudio() {
+      if (window.shinobiAudio) {
+        window.shinobiAudio.ensureContext();
+      }
+    }
+
+    function toggleAudio() {
+      ensureAudio();
+      audioMuted = !audioMuted;
+      if (window.shinobiAudio) {
+        window.shinobiAudio.setMuted(audioMuted);
+      }
+      const btn = document.getElementById("audio-toggle-btn");
+      if (btn) btn.textContent = audioMuted ? "🔇" : "🔊";
+    }
+
+    function flashScreen(color = "rgba(0, 240, 255, 0.45)") {
+      const flash = document.getElementById("flash-screen");
+      if (!flash) return;
+      flash.style.background = color;
+      flash.style.opacity = "1";
+      flash.style.transition = "none";
+      setTimeout(() => {
+        flash.style.transition = "opacity 0.45s cubic-bezier(0.1, 0.9, 0.2, 1)";
+        flash.style.opacity = "0";
+      }, 50);
+    }
+
+    function playJutsuAudio(name) {
+      if (!window.shinobiAudio || audioMuted) return;
+      ensureAudio();
+      const n = (name || "").toLowerCase();
+
+      if (n.includes("shadow_army") || n.includes("army")) {
+        for (let i = 0; i < 5; i++) {
+          setTimeout(() => { if (window.shinobiAudio) window.shinobiAudio.playPoof(0.9); }, i * 90);
+        }
+        flashScreen("rgba(0, 240, 255, 0.55)");
+      } else if (n.includes("shadow_clones") || n.includes("clone")) {
+        window.shinobiAudio.playPoof(1.0);
+        flashScreen("rgba(0, 240, 255, 0.35)");
+      } else if (n.includes("clear_clones") || n.includes("disperse")) {
+        window.shinobiAudio.playPoof(0.85);
+        flashScreen("rgba(255, 255, 255, 0.25)");
+      } else if (n.includes("chidori")) {
+        window.shinobiAudio.playChidori(2.2);
+        flashScreen("rgba(0, 200, 255, 0.4)");
+      } else if (n.includes("fireball")) {
+        window.shinobiAudio.playFireball();
+        flashScreen("rgba(255, 100, 0, 0.4)");
+      } else if (n.includes("rasengan")) {
+        window.shinobiAudio.playRasenganCharge();
+        setTimeout(() => {
+          if (window.shinobiAudio) window.shinobiAudio.playRasenganRelease();
+        }, 650);
+        flashScreen("rgba(0, 240, 255, 0.45)");
+      } else if (n.includes("substitution") || n.includes("log")) {
+        window.shinobiAudio.playPoof();
+        setTimeout(() => {
+          if (window.shinobiAudio) window.shinobiAudio.playHit(0.9);
+        }, 80);
+        flashScreen("rgba(180, 130, 70, 0.35)");
+      }
+    }
+
+    function toggleGuide() {
+      const modal = document.getElementById("guide-modal");
+      if (modal) modal.classList.toggle("open");
+    }
+
+    function showBanner(text) {
+      const banner = document.getElementById("action-banner");
+      if (banner) {
+        banner.textContent = text;
+        banner.classList.add("visible");
+        clearTimeout(window.bannerTimer);
+        window.bannerTimer = setTimeout(() => banner.classList.remove("visible"), 2600);
+      }
+    }
+
+    // Trigger Jutsu on Server
+    async function triggerJutsu(name) {
+      ensureAudio();
+      playJutsuAudio(name);
+      showBanner(`${name.toUpperCase().replace('_', ' ')} ACTIVATED!`);
+      try {
+        await fetch(`/trigger/${name}`);
+      } catch (e) {
+        console.warn("Trigger request sent:", e);
+      }
+    }
+
+    // Poll live status & gestures
+    let lastActiveJutsu = "None";
+    setInterval(async () => {
+      try {
+        const res = await fetch("/status");
+        if (res.ok) {
+          const data = await res.json();
+          const badge = document.getElementById("gesture-detected-badge");
+          if (badge && data.gesture) {
+            badge.textContent = `Pose: ${data.gesture}`;
+            if (data.gesture !== "None" && data.gesture !== "READY: SHOW HAND") badge.classList.add("active");
+            else badge.classList.remove("active");
+          }
+
+          if (data.active_jutsu && data.active_jutsu !== "None" && data.active_jutsu !== lastActiveJutsu) {
+            lastActiveJutsu = data.active_jutsu;
+            showBanner(data.active_jutsu + " ACTIVATED!");
+            playJutsuAudio(data.active_jutsu);
+          }
+        }
+      } catch (e) {}
+    }, 150);
+
+    // Keyboard Shortcuts
+    window.addEventListener("keydown", (e) => {
+      ensureAudio();
+      if (e.repeat) return;
+      switch(e.key) {
+        case "1": triggerJutsu("shadow_clones"); break;
+        case "2": triggerJutsu("chidori"); break;
+        case "3": triggerJutsu("fireball"); break;
+        case "4": triggerJutsu("rasengan"); break;
+        case "5": triggerJutsu("substitution"); break;
+        case "0": triggerJutsu("shadow_army"); break;
+        case "c":
+        case "C":
+        case "Escape": triggerJutsu("clear_clones"); break;
+        case "m":
+        case "M": toggleAudio(); break;
+      }
+    });
+
+    // Touch / Click resume audio
+    window.addEventListener("pointerdown", () => ensureAudio(), { once: true });
+
+    // Fallback if camera stream is offline
+    function handleStreamError() {
+      const img = document.getElementById("camera-stream");
+      const status = document.getElementById("status-text");
+      if (status) {
+        status.textContent = "Connecting to camera feed...";
+      }
+      setTimeout(() => {
+        img.src = "/video_feed?" + Date.now();
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
