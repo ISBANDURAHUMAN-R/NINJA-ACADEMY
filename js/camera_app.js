@@ -462,8 +462,13 @@ class ShadowJutsuCameraApp {
 
   triggerJutsuByName(name) {
     switch (name) {
+      case "shadow_clones":
       case "shadow_clone":
         this.castShadowClones();
+        break;
+      case "clear_clones":
+      case "clear":
+        this.clearClones();
         break;
       case "shadow_army":
         this.castShadowArmy();
@@ -481,6 +486,7 @@ class ShadowJutsuCameraApp {
         this.castFireball();
         break;
       case "chakra_shield":
+      case "shield":
         this.castShield();
         break;
       case "flashbang":
@@ -830,6 +836,11 @@ class ShadowJutsuCameraApp {
   }
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  window.app = new ShadowJutsuCameraApp();
-});
+window.ShadowJutsuCameraApp = ShadowJutsuCameraApp;
+window.startClientCameraApp = function() {
+  if (!window.app) {
+    window.app = new ShadowJutsuCameraApp();
+  }
+  return window.app;
+};
+

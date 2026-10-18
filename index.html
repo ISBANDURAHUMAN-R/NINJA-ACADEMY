@@ -152,10 +152,15 @@
     </div>
   </div>
 
-  <!-- Procedural Web Audio Engine & Frontend Controller -->
+  <!-- Procedural Web Audio Engine & Camera Engines -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
   <script src="js/audio.js"></script>
+  <script src="js/camera_app.js"></script>
   <script>
     let audioMuted = false;
+    let clientAppStarted = false;
+    let streamRetryCount = 0;
 
     function ensureAudio() {
       if (window.shinobiAudio) {
@@ -237,21 +242,28 @@
       }
     }
 
-    // Trigger Jutsu on Server
+    // Trigger Jutsu on Server or Local App
     async function triggerJutsu(name) {
       ensureAudio();
       playJutsuAudio(name);
       showBanner(`${name.toUpperCase().replace('_', ' ')} ACTIVATED!`);
+
+      // If client-side standalone camera app is active (e.g. GitHub Pages)
+      if (window.app && window.app.triggerJutsuByName) {
+        window.app.triggerJutsuByName(name);
+      }
+
       try {
         await fetch(`/trigger/${name}`);
       } catch (e) {
-        console.warn("Trigger request sent:", e);
+        // Expected when running statically on GitHub Pages
       }
     }
 
-    // Poll live status & gestures
+    // Poll live status & gestures (when Python server is running)
     let lastActiveJutsu = "None";
     setInterval(async () => {
+      if (clientAppStarted) return;
       try {
         const res = await fetch("/status");
         if (res.ok) {
@@ -294,16 +306,44 @@
     // Touch / Click resume audio
     window.addEventListener("pointerdown", () => ensureAudio(), { once: true });
 
-    // Fallback if camera stream is offline
+    // Fallback if camera stream is offline (automatically switches to client webcam on GitHub Pages)
     function handleStreamError() {
       const img = document.getElementById("camera-stream");
       const status = document.getElementById("status-text");
+      streamRetryCount++;
+
+      // If on GitHub Pages or if local Python stream fails after 2 tries:
+      if (streamRetryCount >= 2 || window.location.hostname.includes("github.io") || window.location.protocol === "file:") {
+        if (!clientAppStarted) {
+          clientAppStarted = true;
+          if (img) img.style.display = "none";
+          const video = document.getElementById("main-webcam");
+          const canvas = document.getElementById("fx-canvas");
+          if (video) video.style.display = "block";
+          if (canvas) canvas.style.display = "block";
+          if (status) status.textContent = "🟢 Standalone Browser Mode (Webcam & AR FX Active)";
+          if (window.startClientCameraApp) {
+            window.startClientCameraApp();
+          }
+        }
+        return;
+      }
+
       if (status) {
         status.textContent = "Connecting to camera feed...";
       }
       setTimeout(() => {
-        img.src = "/video_feed?" + Date.now();
+        if (!clientAppStarted) {
+          img.src = "/video_feed?" + Date.now();
+        }
       }, 1500);
+    }
+
+    // Auto-detect GitHub Pages or static host to immediately engage browser webcam
+    if (window.location.hostname.includes("github.io") || window.location.protocol === "file:") {
+      window.addEventListener("DOMContentLoaded", () => {
+        handleStreamError();
+      });
     }
   </script>
 
