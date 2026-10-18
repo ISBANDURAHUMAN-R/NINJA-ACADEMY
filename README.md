@@ -1,4 +1,4 @@
-# 3D Ninja Academy: Shadow Jutsu Simulator 🥷🌀
+# 3D Ninja : Jutsu  🥷🌀
 
 An immersive, playable 3D anime ninja training game inspired by Naruto, featuring live webcam computer vision and real-time hand gesture recognition powered by Python, OpenCV, MediaPipe, and Three.js.
 
