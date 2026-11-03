@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.png" alt="NINJA-ACADEMY Banner" width="100%">
+</p>
+
 # 3D Ninja : Jutsu  🥷🌀
 
 An immersive, playable 3D anime ninja training game inspired by Naruto, featuring live webcam computer vision and real-time hand gesture recognition powered by Python, OpenCV, MediaPipe, and Three.js.
