@@ -8,11 +8,11 @@
 3D Ninja : Jutsu is a computer vision web game that brings gesture-controlled training mechanics to life using real-time hand tracking and procedural rendering. By analyzing webcam video input through MediaPipe and OpenCV, the application translates physical finger counts into visual elemental effects and procedural audio.
 
 ## ❖ Key Features
-- ▪ Real-time hand pose and skeletal tracking using Google MediaPipe and OpenCV.
-- ▫ Finger counting gesture classifier mapping hand signs to specific actions (Rasengan, Chidori, Fireball, Substitution, and Shadow Clones).
-- ▴ Time-delayed video cloning system that spawns multiple video feeds of the player.
-- ▿ Three.js 3D overlay rendering visual particle spheres and shield meshes on tracked coordinates.
-- ⬡ Procedural audio synthesizer built with the Web Audio API for zero-latency sound effects.
+- Real-time hand pose and skeletal tracking using Google MediaPipe and OpenCV.
+- Finger counting gesture classifier mapping hand signs to specific actions (Rasengan, Chidori, Fireball, Substitution, and Shadow Clones).
+- Time-delayed video cloning system that spawns multiple video feeds of the player.
+- Three.js 3D overlay rendering visual particle spheres and shield meshes on tracked coordinates.
+- Procedural audio synthesizer built with the Web Audio API for zero-latency sound effects.
 
 ## ⬢ Technologies Used
 - Python 3.9+
