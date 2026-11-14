@@ -2,13 +2,13 @@
   <img src="assets/banner.png" alt="NINJA-ACADEMY Banner" width="100%">
 </p>
 
-# 3D Ninja : Jutsu  🥷🌀
+# ◈ 3D Ninja : Jutsu
 
 An immersive, playable 3D anime ninja training game inspired by Naruto, featuring live webcam computer vision and real-time hand gesture recognition powered by Python, OpenCV, MediaPipe, and Three.js.
 
 ---
 
-## 🌟 Core Concept
+## ✦ Core Concept
 
 The application displays **YOUR ACTUAL LIVE WEBCAM FOOTAGE ON THE BIG SCREEN** with **REAL-TIME NEURAL LIVE SKELETON TRACKING**:
 
@@ -25,24 +25,24 @@ The application displays **YOUR ACTUAL LIVE WEBCAM FOOTAGE ON THE BIG SCREEN** w
 
 ---
 
-## 🥋 Ultra-Easy Hand Signs (Simple Finger Counting!)
+## ❖ Ultra-Easy Hand Signs (Simple Finger Counting!)
 
 No complicated seals or stiff poses required! Just count your fingers or make natural hand shapes:
 
 | Hand Sign / Shape | Jutsu Activated | Visual & Audio Effect | Keyboard |
 |:---|:---|:---|:---:|
-| ✋ **5 Fingers (Any Open Hand)** | **Shadow Clone Jutsu (Kage Bunshin)** | Spawns 3 time-delayed video clones of YOU in clouds of billowing smoke! | `[1]` |
-| ✌️ **2 Fingers (Peace / V-Sign)** | **Chidori (One Thousand Birds)** | Electric blue lightning crackles and jumps along your fingertips with chirping sound! | `[2]` |
-| ☝️ **1 Finger (Point Up)** | **Fireball Jutsu (Katon: Gokakyu)** | Great roaring flame fireball launches from your fingertip toward the screen! | `[3]` |
-| ✊ **0 Fingers (Closed Fist)** | **Rasengan** | Swirling blue chakra sphere charges inside your fist with vortex rings! | `[4]` |
-| 👍 **Thumbs Up** | **Substitution Jutsu (Kawarimi)** | Instant smoke explosion; you vanish and a wooden training log takes your place! | `[5]` |
-| 🙌 **Both Hands Up** | **Ultimate Shadow Army (Taju Kage Bunshin)** | Massive smoke barrage; 10+ shadow clones fill the entire screen! | `[0]` |
-| 👎 **Thumb Down OR 👌 3 Fingers** | **Disperse / Delete Shadow Clones** | Instantly deletes and removes all active shadow clones in puffs of smoke! | `[C]` |
+| › **5 Fingers (Open Hand)** | **Shadow Clone Jutsu (Kage Bunshin)** | Spawns 3 time-delayed video clones of YOU in clouds of billowing smoke! | `[1]` |
+| › **2 Fingers (V-Sign)** | **Chidori (One Thousand Birds)** | Electric blue lightning crackles and jumps along your fingertips with chirping sound! | `[2]` |
+| › **1 Finger (Point Up)** | **Fireball Jutsu (Katon: Gokakyu)** | Great roaring flame fireball launches from your fingertip toward the screen! | `[3]` |
+| › **0 Fingers (Fist)** | **Rasengan** | Swirling blue chakra sphere charges inside your fist with vortex rings! | `[4]` |
+| › **Thumbs Up** | **Substitution Jutsu (Kawarimi)** | Instant smoke explosion; you vanish and a wooden training log takes your place! | `[5]` |
+| › **Both Hands Up** | **Ultimate Shadow Army (Taju Kage Bunshin)** | Massive smoke barrage; 10+ shadow clones fill the entire screen! | `[0]` |
+| › **Thumb Down or 3 Fingers** | **Disperse / Delete Shadow Clones** | Instantly deletes and removes all active shadow clones in puffs of smoke! | `[C]` |
 
 ---
 
 
-## 🚀 Quick Start Guide
+## ▲ Quick Start Guide
 
 ### Option 1: One-Click Start (Recommended on Windows)
 Simply double-click `start_game.bat`!
@@ -62,7 +62,7 @@ This will automatically launch the Shadow Jutsu Camera server and open the web a
 
 ---
 
-## 🛡️ Accessibility & Safety
+## § Accessibility & Safety
 - **Photo-Sensitivity Mode**: Located in the in-game Settings panel (`⚙️`). Replaces the blinding white flashbang with a comfortable dark indigo vignette.
 - **Flash Intensity Slider**: Allows adjusting flash opacity from 10% to 100%.
 - **Synthesized Audio**: All audio is procedurally generated through the Web Audio API with zero external media files, zero loading delay, and master volume control.
