@@ -20,29 +20,29 @@
 ```mermaid
 graph TD
     subgraph VisionPipeline ["OpenCV & MediaPipe Backend (Python)"]
-        Cam["Webcam Video Capture"] --> CV["OpenCV Frame Preprocessing"]
-        CV --> MP["MediaPipe Hand Landmarker Task<br/>21 3D Landmarks"]
-        MP --> GestureDetect["Gesture & Finger-Count Classifier"]
-        GestureDetect --> WSServer["WebSockets Server (Port 8765)"]
+        Cam["Webcam Video Capture"] --> CV["OpenCV Frame<br/>Preprocessing"]
+        CV --> MP["MediaPipe Hand<br/>Landmarker (21 3D Pts)"]
+        MP --> GestureDetect["Gesture &amp;<br/>Finger Classifier"]
+        GestureDetect --> WSServer["WebSockets Server<br/>(Port 8765)"]
     end
 
     subgraph BrowserClient ["Frontend Browser Engine (Three.js & Canvas)"]
-        WSClient["WebSocket Client Receiver"] --> StateBus["Jutsu Event Dispatcher"]
+        WSClient["WebSocket Client<br/>Receiver"] --> StateBus["Jutsu Event<br/>Dispatcher"]
         StateBus --> JutsuState{"Classified Jutsu"}
-        JutsuState -- 1 Finger --> Rasengan["Rasengan Swirling Energy Sphere"]
-        JutsuState -- 2 Fingers --> Chidori["Chidori Lightning Particle Arc"]
-        JutsuState -- 3 Fingers --> Fireball["Katon Fireball Shader Effect"]
-        JutsuState -- 4 Fingers --> Clone["Shadow Clone Delay Buffer"]
-        JutsuState -- 5 Fingers --> Barrier["Chakra Shield Barrier"]
+        JutsuState -- 1 Finger --> Rasengan["Rasengan Swirling<br/>Energy Sphere"]
+        JutsuState -- 2 Fingers --> Chidori["Chidori Lightning<br/>Particle Arc"]
+        JutsuState -- 3 Fingers --> Fireball["Katon Fireball<br/>Shader Effect"]
+        JutsuState -- 4 Fingers --> Clone["Shadow Clone<br/>Delay Buffer"]
+        JutsuState -- 5 Fingers --> Barrier["Chakra Shield<br/>Barrier"]
     end
 
     subgraph GraphicsAudio ["Real-time Audio-Visual Renderers"]
-        Rasengan --> ThreeMesh["Three.js Particle & Mesh Layer"]
+        Rasengan --> ThreeMesh["Three.js Particle<br/>& Mesh Layer"]
         Chidori --> ThreeMesh
         Fireball --> ThreeMesh
         Barrier --> ThreeMesh
-        Clone --> CanvasMulti["HTML5 Multi-Stream Video Grid"]
-        StateBus --> AudioSynth["Web Audio API Procedural Synth"]
+        Clone --> CanvasMulti["HTML5 Multi-Stream<br/>Video Grid"]
+        StateBus --> AudioSynth["Web Audio API<br/>Procedural Synth"]
     end
 
     WSServer --> WSClient
