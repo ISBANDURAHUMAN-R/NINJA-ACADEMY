@@ -19,30 +19,30 @@
 ## ◆ System Architecture
 ```mermaid
 graph TD
-    subgraph VisionPipeline ["OpenCV & MediaPipe Backend (Python)"]
-        Cam["Webcam Video Capture"] --> CV["OpenCV Frame<br/>Preprocessing"]
-        CV --> MP["MediaPipe Hand<br/>Landmarker (21 3D Pts)"]
-        MP --> GestureDetect["Gesture &amp;<br/>Finger Classifier"]
-        GestureDetect --> WSServer["WebSockets Server<br/>(Port 8765)"]
+    subgraph VisionPipeline ["&nbsp; OpenCV &amp; MediaPipe Backend &nbsp;"]
+        Cam["&nbsp; Webcam Video &nbsp;<br/>&nbsp; Capture &nbsp;"] --> CV["&nbsp; OpenCV Frame &nbsp;<br/>&nbsp; Preprocessing &nbsp;"]
+        CV --> MP["&nbsp; MediaPipe Hands &nbsp;<br/>&nbsp; (21 3D Landmarks) &nbsp;"]
+        MP --> GestureDetect["&nbsp; Gesture &amp; &nbsp;<br/>&nbsp; Finger Classifier &nbsp;"]
+        GestureDetect --> WSServer["&nbsp; WebSockets Server &nbsp;<br/>&nbsp; (Port 8765) &nbsp;"]
     end
 
-    subgraph BrowserClient ["Frontend Browser Engine (Three.js & Canvas)"]
-        WSClient["WebSocket Client<br/>Receiver"] --> StateBus["Jutsu Event<br/>Dispatcher"]
-        StateBus --> JutsuState{"Classified Jutsu"}
-        JutsuState -- 1 Finger --> Rasengan["Rasengan Swirling<br/>Energy Sphere"]
-        JutsuState -- 2 Fingers --> Chidori["Chidori Lightning<br/>Particle Arc"]
-        JutsuState -- 3 Fingers --> Fireball["Katon Fireball<br/>Shader Effect"]
-        JutsuState -- 4 Fingers --> Clone["Shadow Clone<br/>Delay Buffer"]
-        JutsuState -- 5 Fingers --> Barrier["Chakra Shield<br/>Barrier"]
+    subgraph BrowserClient ["&nbsp; Frontend Browser Engine &nbsp;"]
+        WSClient["&nbsp; WebSocket Client &nbsp;<br/>&nbsp; Receiver &nbsp;"] --> StateBus["&nbsp; Jutsu Event &nbsp;<br/>&nbsp; Dispatcher &nbsp;"]
+        StateBus --> JutsuState{"&nbsp; Jutsu? &nbsp;"}
+        JutsuState -- 1 Finger --> Rasengan["&nbsp; Rasengan Swirling &nbsp;<br/>&nbsp; Energy Sphere &nbsp;"]
+        JutsuState -- 2 Fingers --> Chidori["&nbsp; Chidori Lightning &nbsp;<br/>&nbsp; Particle Arc &nbsp;"]
+        JutsuState -- 3 Fingers --> Fireball["&nbsp; Katon Fireball &nbsp;<br/>&nbsp; Shader Effect &nbsp;"]
+        JutsuState -- 4 Fingers --> Clone["&nbsp; Shadow Clone &nbsp;<br/>&nbsp; Delay Buffer &nbsp;"]
+        JutsuState -- 5 Fingers --> Barrier["&nbsp; Chakra Shield &nbsp;<br/>&nbsp; Barrier &nbsp;"]
     end
 
-    subgraph GraphicsAudio ["Real-time Audio-Visual Renderers"]
-        Rasengan --> ThreeMesh["Three.js Particle<br/>& Mesh Layer"]
+    subgraph GraphicsAudio ["&nbsp; Real-time Renderers &nbsp;"]
+        Rasengan --> ThreeMesh["&nbsp; Three.js Mesh &nbsp;<br/>&nbsp; &amp; Particle Layer &nbsp;"]
         Chidori --> ThreeMesh
         Fireball --> ThreeMesh
         Barrier --> ThreeMesh
-        Clone --> CanvasMulti["HTML5 Multi-Stream<br/>Video Grid"]
-        StateBus --> AudioSynth["Web Audio API<br/>Procedural Synth"]
+        Clone --> CanvasMulti["&nbsp; HTML5 Multi-Stream &nbsp;<br/>&nbsp; Video Grid &nbsp;"]
+        StateBus --> AudioSynth["&nbsp; Web Audio API &nbsp;<br/>&nbsp; Procedural Synth &nbsp;"]
     end
 
     WSServer --> WSClient
